@@ -20,7 +20,7 @@ public class Parser {
 
 		try {
 
-			args = setParameters(args);
+			//args = setParameters(args);
 			
 			
 			if (args.length > 0) {
@@ -42,7 +42,7 @@ public class Parser {
 
 					final LogFileFilterDTO filter = new LogFileFilterDTO();
 					filter.setDuration(duration);
-					filter.setStartDate(ConverterUtil.convertDateToLocalDateTime(startDate));
+					filter.setStartDate(ConverterUtil.convertDateToLocalDateTime2(startDate));
 					filter.setThreshold(threshold);
 
 					final LogFileService service = new LogFileService();
@@ -120,7 +120,7 @@ public class Parser {
 	private static String[] setParameters(String[] args) {
 		args = new String[] { 
 				"--accesslog=/Users/willian/Desktop/Java_MySQL_Test/access.log", 
-				"--startDate=2017-01-01 00:00:00.000", 
+				"--startDate=2017-01-01.00:00:00", 
 				"--duration=hourly", 
 				"--threshold=1" };
 

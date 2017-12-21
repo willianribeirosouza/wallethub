@@ -1,7 +1,10 @@
 com/ef/parser/LogFileParser.class
 com/ef/util/ConverterUtil.class
+com/ef/repository/BlockCommentRepository.class
+com/ef/dto/BlockCommentDTO.class
+com/ef/service/BlockCommentService.class
+com/ef/model/BlockComment.class
 com/ef/parser/LogFileParser$1.class
-com/ef/model/BlockComments.class
 com/ef/util/HibernateUtil.class
 com/ef/loader/LogFileLoader.class
 com/ef/Parser.class

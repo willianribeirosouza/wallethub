@@ -9,6 +9,10 @@ public abstract class ConverterUtil {
 		return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
 	}
 
+	public static LocalDateTime convertDateToLocalDateTime2(String date) {
+		return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm:ss"));
+	}
+	
 	public static String returnComment(Integer status) {
 		String comment = "";
 
