@@ -7,6 +7,7 @@ public class LogFileFilterDTO {
 	private LocalDateTime startDate;
 	private String duration;
 	private Integer threshold;
+	private String ipAddress;
 	
 	public LocalDateTime getStartDate() {
 		return startDate;
@@ -25,5 +26,11 @@ public class LogFileFilterDTO {
 	}
 	public void setThreshold(Integer threshold) {
 		this.threshold = threshold;
+	}
+	public String getIpAddress() {
+		return ipAddress;
+	}
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 }

@@ -1,13 +1,16 @@
 package com.ef;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.ef.dto.BlockCommentDTO;
 import com.ef.dto.LogFileDTO;
 import com.ef.dto.LogFileFilterDTO;
 import com.ef.loader.LogFileLoader;
+import com.ef.service.BlockCommentService;
 import com.ef.service.LogFileService;
 import com.ef.util.ConverterUtil;
 
@@ -17,7 +20,7 @@ public class Parser {
 
 		try {
 
-			//args = setParameters(args);
+			args = setParameters(args);
 			
 			
 			if (args.length > 0) {
@@ -54,14 +57,30 @@ public class Parser {
 					System.err.println();
 					System.err.println();
 					
-					if(listIp.size() > 0) {
+					if(!listIp.isEmpty()) {
+						
+						List<BlockCommentDTO> listBC = new ArrayList<BlockCommentDTO>();
+						
 						for(LogFileDTO dto : listIp) {
 							System.out.println("The IP: " + dto.getIpAddress() + " has made more then " + filter.getThreshold() + " requests.");
+							
+							final BlockCommentDTO bc = new BlockCommentDTO();
+							bc.setComment(ConverterUtil.returnComment(dto.getStatus()));
+							bc.setIpAddress(dto.getIpAddress());
+							bc.setRequestDateTime(dto.getRequestDateTime());
+							bc.setStatus(dto.getStatus());
+							
+							listBC.add(bc);
 						}
 						
 						System.err.println("-------------------------------------------------------------------------------------------------------------------------------");
 						System.err.println();
 						System.err.println();
+						
+						if(!listBC.isEmpty()) {
+							final BlockCommentService blockCommentService = new BlockCommentService();
+							blockCommentService.saveBlockComments(listBC);
+						}
 					}
 				}
 
@@ -100,10 +119,10 @@ public class Parser {
 	@SuppressWarnings("unused")
 	private static String[] setParameters(String[] args) {
 		args = new String[] { 
-				//"--accesslog=/Users/willian/Desktop/Java_MySQL_Test/access2.log", 
+				"--accesslog=/Users/willian/Desktop/Java_MySQL_Test/access.log", 
 				"--startDate=2017-01-01 00:00:00.000", 
 				"--duration=hourly", 
-				"--threshold=100" };
+				"--threshold=1" };
 
 		return args;
 	}

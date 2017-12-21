@@ -24,6 +24,7 @@ public class LogFileRepository {
 		try {
 			transaction = session.beginTransaction();
 			
+			@SuppressWarnings("unchecked")
 			Query<LogFile> query = session.createQuery("select l from LogFile l where l.requestDateTime >= :startDate and l.requestDateTime <= :endDate group by l.ip having count(l.ip) > :threshold");
 			query.setParameter("startDate", filter.getStartDate());
 			query.setParameter("endDate", getEndDate(filter.getStartDate(), filter.getDuration()));
